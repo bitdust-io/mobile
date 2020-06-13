@@ -1,4 +1,4 @@
-# Welcome to BitDust IU
+# Welcome to BitDust UI
 
 This project requires the BitDust [core](https://github.com/bitdust-io/devel) to be running on the background.
  
