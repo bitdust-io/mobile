@@ -1,0 +1,26 @@
+$sizes: (0, 10, 15, 20, 25, 30, 40, 50);
+$positions: ('top', 'left', 'bottom', 'right');
+
+@each $size in $sizes {
+    .mg-#{$size} {
+        margin: $size + px;
+    }
+    .pd-#{$size} {
+        padding: $size + px;
+    }
+    .mg-tb-#{$size} {
+        margin: $size + px 0;
+    }
+    .pd-tb-#{$size} {
+        padding: $size + px 0;
+    }
+
+    @each $position in $positions {
+        .mg-#{$position}-#{$size} {
+            margin-#{$position}: $size + px;
+        }
+        .pd-#{$position}-#{$size} {
+            padding-#{$position}: $size + px;
+        }
+    }
+}

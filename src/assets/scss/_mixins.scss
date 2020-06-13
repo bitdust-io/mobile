@@ -1,0 +1,97 @@
+@import 'config';
+
+@mixin breakpoint-value($value) {
+    @media (min-width: $value) {
+        @content;
+    }
+}
+
+@mixin breakpoint-up($class) {
+    @if $class==xs {
+        @media (min-width: map-get($breakpoints, extraSmall)) {
+            @content;
+        }
+    } @else if $class==sm {
+        @media (min-width: map-get($breakpoints, small)) {
+            @content;
+        }
+    } @else if $class==md {
+        @media (min-width: map-get($breakpoints, medium)) {
+            @content;
+        }
+    } @else if $class==lg {
+        @media (min-width: map-get($breakpoints, large)) {
+            @content;
+        }
+    } @else if $class==xl {
+        @media (min-width: map-get($breakpoints, extraLarge)) {
+            @content;
+        }
+    } @else {
+        @warn 'Breakpoint mixin supports: xs, sm, md, lg';
+    }
+}
+
+@mixin breakpoint-down($class) {
+    @if $class==xs {
+        @media (max-width: map-get($breakpoints, extraSmall) - 1) {
+            @content;
+        }
+    } @else if $class==sm {
+        @media (max-width: map-get($breakpoints, small) - 1) {
+            @content;
+        }
+    } @else if $class==md {
+        @media (max-width: map-get($breakpoints, medium) - 1) {
+            @content;
+        }
+    } @else if $class==lg {
+        @media (max-width: map-get($breakpoints, large) - 1) {
+            @content;
+        }
+    } @else {
+        @warn 'Breakpoint mixin supports: xs, sm, md, lg';
+    }
+}
+
+// Utility function for mixin font-size
+@mixin make-font-size($fs-font-size) {
+    // If $fs-font-size is a list, include both font-size and line-height
+    @if type-of($fs-font-size) == "list" {
+        font-size: nth($fs-font-size, 1);
+        @if (length($fs-font-size) > 1) {
+            line-height: nth($fs-font-size, 2);
+        }
+    } @else {
+        font-size: $fs-font-size;
+    }
+}
+
+@mixin font-size($fs-map, $fs-breakpoints: $breakpoints) {
+    @each $fs-breakpoint, $fs-font-size in $fs-map {
+        @if $fs-breakpoint == default {
+            @include make-font-size($fs-font-size);
+        } @else {
+            // If $fs-font-size is a key that exists in $fs-breakpoints, use the value
+            @if map-has-key($fs-breakpoints, $fs-breakpoint) {
+                $fs-breakpoint: map-get($fs-breakpoints, $fs-breakpoint);
+            }
+            @media screen and (min-width: $fs-breakpoint) {
+                @include make-font-size($fs-font-size);
+            }
+        }
+    }
+}
+
+@mixin hidden($mq) {
+    @include breakpoint-down($mq) {
+        display: none;
+    }
+}
+
+@mixin visible($display, $mq) {
+    display: $display;
+    @include breakpoint-up($mq) {
+        display: none;
+    }
+}
