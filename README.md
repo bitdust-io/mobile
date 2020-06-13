@@ -1,17 +1,32 @@
-# mobile
-BitDust APP for Android built with Cordova framework
+# Welcome to BitDust IU
 
-To add android platform to cordova:
+This project requires the BitDust [core](https://github.com/bitdust-io/devel) to be running on the background.
+ 
+[![Build Status](https://travis-ci.com/bitdust-io/ui.svg?branch=master)](https://travis-ci.com/bitdust-io/ui)
+
+## Project setup
+
+Install node dependencies
 ```
-$ cordova platform add android
+npm i || yarn
 ```
 
-Generate a private key:
+### Compiles and hot-reloads for development
 ```
-keytool -genkey -v -keystore bitdust.keystore -alias BitDust -keyalg RSA -keysize 2048 -validity 20000
+npm start
 ```
 
-To generate the APK, use your private key and chosen password:
+### Compiles and minify for production
 ```
- cordova build android --release -- --keystore=bitdust.keystore --storePassword=YOUR_PASSWORD --alias=BitDust --password=YOUR_PASSWORD
+npm run build
+```
+
+### Run your tests
+```
+npm run test
+```
+
+### Lints and fixes files
+```
+npm run lint
 ```
