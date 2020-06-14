@@ -35,6 +35,11 @@
     @import "../assets/scss/config";
 
     .loading {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
         display: flex;
         align-items: center;
         justify-content: center;

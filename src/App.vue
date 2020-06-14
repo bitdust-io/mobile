@@ -1,6 +1,7 @@
 <template>
     <div id="app">
-        <b-navbar class="is-fixed-top">
+        {{ $route.name }}
+        <b-navbar class="is-fixed-top" v-show="this.$route.name != 'loading'">
             <template slot="start">
                 <b-navbar-item tag="router-link" :to="{ path: '/chat' }">
                     <UserDetails />
@@ -13,7 +14,8 @@
                 </b-navbar-item>
             </template>
         </b-navbar>
-        <div style="margin-top: 52px;">
+        <div style="position: absolute; left: 0px; right: 0px; bottom: 0px;"
+             v-bind:style="this.$route.name != 'loading' ? 'top: 53px;' : 'top: 0px;'">
             <router-view />
         </div>
     </div>
