@@ -21,6 +21,7 @@
 
         @Watch('connectionStatus')
         onConnectionStatus(value: any) {
+            console.log('onConnectionStatus', value);
             if (value === 'OK') this.$router.push('/chat');
         }
 
