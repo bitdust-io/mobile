@@ -13,8 +13,8 @@
                 </b-navbar-item>
             </template>
         </b-navbar>
-        <div style="position: absolute; left: 0px; right: 0px;"
-             v-bind:style="this.$route.name != 'loading' ? 'top: 53px; height: calc(100% - 53px);' : 'top: 0px; height: 100%;'"
+        <div id="app-inner" style="position: absolute; left: 0px; right: 0px;"
+             v-bind:style="{ top: windowTop + 'px', height: windowHeight + 'px' }"
         >
             <router-view />
         </div>
@@ -36,20 +36,29 @@
     export default class App extends Vue {
         @applicationModule.State identity!: IdentityResultInterface;
 
+        windowTop = 0;
         windowHeight = 0;
 
         mounted() {
             console.log('mounted');
-            // window.addEventListener('resize', this.onResize);
+            this.onResize();
+            window.addEventListener('resize', this.onResize);
         }
 
         beforeDestroy() {
-            // window.removeEventListener('resize', this.onResize);
+            console.log('beforeDestroy');
+            window.removeEventListener('resize', this.onResize);
         }
 
         onResize() {
-            console.log('onResize', window.innerHeight);
-            this.windowHeight = window.innerHeight;
+            console.log('onResize', window.innerHeight, this.$route.name);
+            if (this.$route.name !== 'loading') {
+                this.windowHeight = window.innerHeight - 53;
+                this.windowTop = 53;
+            } else {
+                this.windowHeight = window.innerHeight;
+                this.windowTop = 0;
+            }
         }
 
         @Watch('windowHeight')
