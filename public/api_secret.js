@@ -1,1 +1,1 @@
-var API_SECRET = "abc";
+var API_SECRET = '';
