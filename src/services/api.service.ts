@@ -34,8 +34,7 @@ const ApiService: ApiTypes = {
     },
 
     getChatHistoryForUser(userGlobalId: string) {
-        let query = [{key: 'id', value: userGlobalId}];
-        return this.makeGet('message/history', query);
+        return this.makeGet('message/history', [{key: 'id', value: userGlobalId}]);
     },
 
     sendMessage(data: MessageInterface) {
@@ -63,7 +62,8 @@ const ApiService: ApiTypes = {
     },
 
     networkConnected(): Promise<any> {
-        return this.makeGet('network/connected');
+        // console.log('networkConnected');
+        return this.makeGet('network/connected', [{key: 'wait_timeout', value: 1}]);
     },
 
     getConfigList(): Promise<any> {
@@ -75,7 +75,7 @@ const ApiService: ApiTypes = {
     },
 
     getServiceList(): Promise<any> {
-        return this.makeGet('service/list', [{'config': 1}]);
+        return this.makeGet('service/list', [{key: 'config', value: 1}]);
     },
 
     async makePost(service: string, data: any, params?: Array<RequestParams>) {

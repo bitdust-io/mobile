@@ -4,7 +4,7 @@ import api from '@/services/api.service';
 
 export function convertMessage(m: any, globalId: string) {
     const authorIsMe = globalId === m.sender.glob_id.replace('master$', '');
-    console.log('convertMessage', authorIsMe, globalId);
+    // console.log('convertMessage', authorIsMe, globalId);
     return {
         author: authorIsMe ? 'me' : m.sender.glob_id.replace('master$', ''),
         name: m.sender.glob_id.replace('master$', ''),
