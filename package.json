@@ -5,7 +5,7 @@
     "author": "Renato Cardoso <re2005@gmail.com>",
     "scripts": {
         "start": "vue-cli-service serve",
-        "build": "vue-cli-service build",
+        "build": "vue-cli-service build; make fix_index_html",
         "test": "vue-cli-service test:unit",
         "test:w": "vue-cli-service test:unit --watch",
         "lint": "vue-cli-service lint",
